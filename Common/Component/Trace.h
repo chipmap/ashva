@@ -24,7 +24,9 @@ struct TraceHeader
     std::chrono::time_point logTime;
 };
 
-// Trace root class
+/**
+ * Trace wrapper
+*/
 class Trace
 {
 
