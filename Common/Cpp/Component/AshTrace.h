@@ -9,7 +9,7 @@
 #include <System/AshTime.h>
 
 // Log level enumeration
-enum LogLevel
+enum AshLogLevel
 {
     Off = 0,
     Debug = 1,
@@ -29,37 +29,37 @@ struct TraceHeader
 /**
  * Trace wrapper
 */
-class Trace
+class AshTrace
 {
 private:
     // Name of the trace object
     std::string mName;
     // Default log level
-    LogLevel mDefaultLogLevel;
+    AshLogLevel mDefaultLogLevel;
     // Shared resource lock
-    Lock mLock;
+    AshLock mLock;
 
     // Default ctor
-    Trace() = delete;
+    AshTrace() = delete;
     // Copy ctor
-    Trace(const Trace&) = delete;
+    AshTrace(const AshTrace&) = delete;
     // Assignment otor
-    Trace& operator = (const Trace&) = delete;
+    AshTrace& operator = (const AshTrace&) = delete;
 
 public:
     // ctor
-    Trace(std::string name, LogLevel defaultLevel);
+    AshTrace(std::string name, LogLevel defaultLevel);
     // dtor
-    ~Trace();
+    virtual ~AshTrace();
 
     // Changes current default log level
-    void SetDefaultLogLevel(LogLevel newLevel)
+    void SetDefaultLogLevel(AshLogLevel newLevel)
     {
-        LockGuard guard(mLock);
+        AshLockGuard guard(mLock);
         mDefaultLogLevel = newLevel;
     }
 
     // Gets current default log level
-    LogLevel GetDefaultLogLevel() { return mDefaultLogLevel; }
+    AshLogLevel GetDefaultLogLevel() { return mDefaultLogLevel; }
 
 };
