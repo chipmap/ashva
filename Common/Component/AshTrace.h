@@ -5,7 +5,8 @@
 #include <string>
 #include <chrono>
 
-#include <System/Lock.h>
+#include <System/AshLock.h>
+#include <System/AshTime.h>
 
 // Log level enumeration
 enum LogLevel
@@ -21,8 +22,8 @@ struct TraceHeader
 {
     std::string name;
     LogLevel level;
-    std::chrono::time_point createTime;
-    std::chrono::time_point logTime;
+    AshTime createTime;
+    AshTime logTime;
 };
 
 /**
