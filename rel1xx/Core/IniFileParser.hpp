@@ -24,6 +24,7 @@ class IniFileParser
         std::string processMultiLine(std::ifstream& file , std::string& line);
         std::array<std::string, 2> processKeyValLine(std::ifstream& file, std::string& line);
         std::string toLower(std::string& s);
+        void trace(const char* format, ...);
 
     public:
 
