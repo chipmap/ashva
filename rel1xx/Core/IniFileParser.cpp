@@ -49,7 +49,8 @@ IniMap IniFileParser::parseFile(const std::string& filepath)
 
     if (!file.is_open()) {
 
-        std::cerr << "Cannot read file.\n";
+        trace("%s\n", "ERROR: Cannot read file.");
+        exit(1);
 
     } else {
 
