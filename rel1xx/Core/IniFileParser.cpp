@@ -68,8 +68,8 @@ IniMap IniFileParser::parseFile(const std::string& filepath)
             } else if (multiLineEmpty_ == true) {
 
                 multiLineEmpty_ = false;
-                trace("%s\n", "WARNING: Empty line detected after multi-line value."\
-                            " Part of the value may be ignored\n");
+                trace("%s\n", "WARNING: Empty line detected for multi-line value."\
+                            " Part of the value may be ignored.\n");
                 continue;
 
             } else if (line[0] == '[') {
@@ -208,20 +208,6 @@ std::array<std::string, 2> IniFileParser::processKeyValLine(std::ifstream& file 
     }
 
     return {key, val};
-
-}
-
-// converts whole string to all lowercase
-std::string IniFileParser::toLower(std::string& s)
-{
-
-    for (char& c : s) {
-
-        c = std::tolower(c);
-        
-    }
-
-    return s;
 
 }
 

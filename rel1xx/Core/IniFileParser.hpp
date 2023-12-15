@@ -21,10 +21,46 @@ class IniFileParser
 
         IniMap parseFile(const std::string& filepath);
         std::string processLine(std::string& line);
-        std::string processMultiLine(std::ifstream& file , std::string& line);
+        std::string processMultiLine(std::ifstream& file, std::string& line);
         std::array<std::string, 2> processKeyValLine(std::ifstream& file, std::string& line);
-        std::string toLower(std::string& s);
         void trace(const char* format, ...);
+
+        // converts whole string to all lowercase
+        std::string IniFileParser::toLower(std::string& s)
+        {
+
+            for (char& c : s) {
+
+                c = std::tolower(c);
+                
+            }
+
+            return s;
+
+        }
+
+        // checks if value exists in parsed data and returns it
+        bool findValue(const std::string& section, const std::string& key, std::string& retValue)
+        {
+
+            bool found = false;
+
+            IniMap::iterator ini = data_.find(section);
+            if (ini != data_.end()) {
+
+                KvMap::iterator kvi = ini->second.find(key);
+                if (kvi != ini->second.end()) {
+
+                    retValue = kvi->second;
+                    found = true;
+
+                }
+
+            }
+
+            return found;
+
+        }
 
     public:
 
@@ -44,14 +80,73 @@ class IniFileParser
 
         void PrintData();
 
-        // std::string GetValue(const std::string& section, const std::string& key, const std::string& defaultValue)
-        // {
-        //     std::string retValue = defaultValue;
-        //     if (data_.find(section) && data_.find(key)) {
-        //         retValue = data_.get();
-        //     }
+        std::string GetValue(const std::string& section, const std::string& key, const std::string& defaultValue)
+        {
 
-        //     return retValue;
-        // }
+            std::string retValue = defaultValue;
+            findValue(section, key, retValue);
+            return retValue;
+
+        }
+
+        int GetValue(const std::string& section, const std::string& key, const int defaultValue)
+        {
+
+            int retValue = defaultValue;
+            std::string tempVal;
+            if (findValue(section, key, tempVal)) {
+
+                retValue = std::stoi(tempVal);
+
+            }
+
+            return retValue;
+
+        }
+
+        double GetValue(const std::string& section, const std::string& key, const double defaultValue)
+        {
+
+            double retValue = defaultValue;
+            std::string tempVal;
+            if (findValue(section, key, tempVal)) {
+
+                retValue = std::stod(tempVal);
+
+            }
+
+            return retValue;
+
+        }
+
+        float GetValue(const std::string& section, const std::string& key, const float defaultValue)
+        {
+
+            float retValue = defaultValue;
+            std::string tempVal;
+            if (findValue(section, key, tempVal)) {
+
+                retValue = std::stof(tempVal);
+                
+            }
+
+            return retValue;
+
+        }
+
+        long GetValue(const std::string& section, const std::string& key, const long defaultValue)
+        {
+
+            long retValue = defaultValue;
+            std::string tempVal;
+            if (findValue(section, key, tempVal)) {
+
+                retValue = std::stol(tempVal);
+                
+            }
+
+            return retValue;
+
+        }
 
 };
