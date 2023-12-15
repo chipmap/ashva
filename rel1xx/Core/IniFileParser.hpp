@@ -26,7 +26,7 @@ class IniFileParser
         void trace(const char* format, ...);
 
         // converts whole string to all lowercase
-        std::string IniFileParser::toLower(std::string& s)
+        std::string toLower(std::string& s)
         {
 
             for (char& c : s) {
