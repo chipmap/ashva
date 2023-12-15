@@ -228,14 +228,3 @@ void IniFileParser::trace(const char* format, ...)
     va_end(args);
 
 }
-
-int main()
-{
-
-    std::string filepath = "./test.ini";
-    IniFileParser testfile(filepath);
-    testfile.PrintData();
-
-    return 0;
-
-}
