@@ -5,13 +5,19 @@
 
 #include "../Core/IniFileParser.hpp"
 
-int main()
+int main(int argc, char* argv[])
 {
 
-    std::string filepath = "./test.ini";
-    IniFileParser testfile(filepath);
-    testfile.PrintData();
+    if (argc > 1) {
 
+        IniFileParser testFile(argv[1]);
+        testFile.PrintData();
+
+    } else {
+
+        std::cout << "Provide file name with path\n";
+        
+    }
     return 0;
 
 }
